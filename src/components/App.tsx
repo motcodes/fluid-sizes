@@ -1,15 +1,15 @@
-import { useState, useEffect } from "react";
-import styled from "styled-components";
-import VisuallyHidden from "components/visuallyHidden";
-import Input from "components/customInput";
-import CodeBlock from "components/codeBlock";
-import Result from "components/result";
-import Warning from "components/warning";
-import oneDecimal from "utils/oneDecimal";
-import GithubIcon from "components/githubIcon";
+import { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import { VisuallyHidden } from './visuallyHidden';
+import Input from './customInput';
+import CodeBlock from './codeBlock';
+import Result from './result';
+import Warning from './warning';
+import oneDecimal from '../utils/oneDecimal';
+import GithubIcon from './githubIcon';
 
 function App() {
-  const [exampleText, setExampleText] = useState("Result (edit me!)");
+  const [exampleText, setExampleText] = useState('Result (edit me!)');
   const [minWidth, setMinWidth] = useState(700);
   const [minSize, setMinSize] = useState(1.5);
   const [maxWidth, setMaxWidth] = useState(1000);
@@ -31,30 +31,39 @@ function App() {
   return (
     <>
       <Wrapper>
-        <Heading>Fluid typography</Heading>
+        <Heading>Fluid Sizes</Heading>
         <Blurb>
-          Create text that scales with the window size, so that your headings
-          look great on any screen. This technique is taken from the{" "}
+          Create not only text that scales with the window size, so that your
+          headings look great on any screen, but also other size attributes like
+          width, margin, scale. This technique is taken from the{' '}
           <Link
             href="https://css-for-js.dev/"
             rel="noopener noreferrer"
             target="_blank"
           >
             wonderful CSS course by Josh Comeau
-          </Link>
-          .
+          </Link>{' '}
+          and a fork from{' '}
+          <Link
+            href="https://fluid-typography.netlify.app/"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            fluid-typography.netlify.app from Erik André Jakobsen
+          </Link>{' '}
+          project.
         </Blurb>
         <Grid>
           <h2>Minimum size</h2>
           <p>
             <Input
               value={minSize}
-              onChange={(e) => setMinSize(e.target.value)}
+              onChange={(e) => setMinSize(parseInt(e.target.value) || 0)}
             />
-            <code>rem</code> at a viewport width of{" "}
+            <code>rem</code> at a viewport width of{' '}
             <Input
               value={minWidth}
-              onChange={(e) => setMinWidth(e.target.value)}
+              onChange={(e) => setMinWidth(parseInt(e.target.value) || 0)}
             />
             <code>px</code>.
           </p>
@@ -62,17 +71,27 @@ function App() {
           <p>
             <Input
               value={maxSize}
-              onChange={(e) => setMaxSize(e.target.value)}
+              onChange={(e) => setMaxSize(parseInt(e.target.value) || 0)}
             />
-            <code>rem</code> at a viewport width of{" "}
+            <code>rem</code> at a viewport width of{' '}
             <Input
               value={maxWidth}
-              onChange={(e) => setMaxWidth(e.target.value)}
+              onChange={(e) => setMaxWidth(parseInt(e.target.value) || 0)}
             />
             <code>px</code>.
           </p>
         </Grid>
         <CodeBlock
+          noMargin
+          {...{ minSize, maxSize, vwCoefficient, remCoefficient }}
+        ></CodeBlock>
+        <CodeBlock
+          noMargin
+          attribute="font-size"
+          {...{ minSize, maxSize, vwCoefficient, remCoefficient }}
+        ></CodeBlock>
+        <CodeBlock
+          attribute="width"
           {...{ minSize, maxSize, vwCoefficient, remCoefficient }}
         ></CodeBlock>
         {Math.abs(remCoefficient) < 1 && (
@@ -92,13 +111,26 @@ function App() {
       </Wrapper>
       <Pusher />
       <Footer>
-        <VisuallyHidden>See the source code on GitHub.</VisuallyHidden>
+        <VisuallyHidden>See the original source code on GitHub.</VisuallyHidden>
         <ButtonLink
           href="https://github.com/jakobsen/fluid-typography"
           rel="noopener noreferrer"
           target="_blank"
         >
           <GithubIcon />
+        </ButtonLink>
+        <VisuallyHidden>See the source code on GitHub.</VisuallyHidden>
+        <ButtonLink
+          href="https://github.com/motcodes/fluid-sizes"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <img
+            src="https://matthiasoberholzer.com/static/d76fbfce7f5e39c3ba9368a46f063ba5/bf8e1/Logo.png"
+            alt="Matthias Oberholzer Logo"
+            width={32}
+            height={32}
+          />
         </ButtonLink>
       </Footer>
     </>
@@ -108,7 +140,7 @@ function App() {
 const Heading = styled.h1`
   font-size: clamp(2.5rem, 3.2vw + 2rem, 4rem);
   min-height: 0vh;
-  font-family: "silkabold";
+  font-family: 'silkabold';
   text-align: center;
   margin: 32px;
   line-height: 1.2;
@@ -140,7 +172,7 @@ const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr 2fr;
   align-items: baseline;
-  max-width: 550px;
+  max-width: 600px;
   & h2 {
     text-align: left;
   }
@@ -174,6 +206,10 @@ const Pusher = styled.div`
 const Footer = styled.footer`
   text-align: center;
   padding: 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  justify-content: center;
 `;
 
 const ButtonLink = styled.a`
@@ -188,7 +224,7 @@ const Link = styled.a`
   color: hsl(199.9deg 91.4% 36.3%);
 
   &:hover {
-    font-family: "silkabold";
+    font-family: 'silkabold';
   }
 `;
 

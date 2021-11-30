@@ -1,15 +1,22 @@
 import { useState, useEffect } from 'react';
 
-function getWindowDimensions() {
+interface IWindow {
+  width: number;
+  height: number;
+}
+
+function getWindowDimensions(): IWindow {
   const { innerWidth: width, innerHeight: height } = window;
   return {
     width,
-    height
+    height,
   };
 }
 
-export default function useWindowDimensions() {
-  const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+export default function useWindowDimensions(): IWindow {
+  const [windowDimensions, setWindowDimensions] = useState<IWindow>(
+    getWindowDimensions()
+  );
 
   useEffect(() => {
     function handleResize() {

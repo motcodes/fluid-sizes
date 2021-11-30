@@ -1,18 +1,18 @@
-import styled from "styled-components";
-import { AlertCircle } from "react-feather";
-import VisuallyHidden from "components/visuallyHidden";
+import styled from 'styled-components';
+import { AlertCircle } from 'react-feather';
+import { VisuallyHidden } from './visuallyHidden';
 
-export default function Warning({ children }) {
-  return (
-    <WarningDiv>
-      <WarningIcon>
+const Warning: React.FunctionComponent = ({ children }) => (
+  <WarningDiv>
+    <WarningIcon>
       <VisuallyHidden>Warning</VisuallyHidden>
-        <AlertCircle size={24} />
-      </WarningIcon>
-      {children}
-    </WarningDiv>
-  );
-}
+      <AlertCircle size={24} />
+    </WarningIcon>
+    {children}
+  </WarningDiv>
+);
+
+export default Warning;
 
 const WarningDiv = styled.div`
   font-size: 1.125rem;
