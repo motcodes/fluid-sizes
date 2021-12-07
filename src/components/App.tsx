@@ -58,12 +58,14 @@ function App() {
           <p>
             <Input
               value={minSize}
-              onChange={(e) => setMinSize(parseInt(e.target.value) || 0)}
+              // @ts-ignore
+              onChange={(e) => setMinSize(e.target.value)}
             />
             <code>rem</code> at a viewport width of{' '}
             <Input
               value={minWidth}
-              onChange={(e) => setMinWidth(parseInt(e.target.value) || 0)}
+              // @ts-ignore
+              onChange={(e) => setMinWidth(e.target.value)}
             />
             <code>px</code>.
           </p>
@@ -71,12 +73,14 @@ function App() {
           <p>
             <Input
               value={maxSize}
-              onChange={(e) => setMaxSize(parseInt(e.target.value) || 0)}
+              // @ts-ignore
+              onChange={(e) => setMaxSize(e.target.value)}
             />
             <code>rem</code> at a viewport width of{' '}
             <Input
               value={maxWidth}
-              onChange={(e) => setMaxWidth(parseInt(e.target.value) || 0)}
+              // @ts-ignore
+              onChange={(e) => setMaxWidth(e.target.value)}
             />
             <code>px</code>.
           </p>
