@@ -31,7 +31,7 @@ function App() {
   return (
     <>
       <Wrapper>
-        <Heading>Fluid Sizes</Heading>
+        <Heading>Fluid Sizes Alabasta</Heading>
         <Blurb>
           Create not only text that scales with the window size, so that your
           headings look great on any screen, but also other size attributes like
